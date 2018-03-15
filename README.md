@@ -7,6 +7,7 @@ https://zeit.co/docs
 ``` sh
 now secrets add line-channel-access-token XXX-XXX-XXX
 now secrets add line-channel-secret XXX-XXX-XXX
+now secrets add docomo-api-key XXX-XXX-XXX
 ```
 
 デプロイ

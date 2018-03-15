@@ -1,11 +1,6 @@
 import * as express from "express";
 import * as line from "@line/bot-sdk";
-
-interface IHandlerArgs<M> {
-  message: M;
-  replyToken: string;
-  source: line.EventSource;
-}
+import handleText, { ITextEvent } from "./handlers/handleText";
 
 if (!process.env.NODE_ENV) {
   const { error } = require("dotenv").config();
@@ -16,37 +11,22 @@ if (!process.env.NODE_ENV) {
 }
 
 const lineConfig = {
-  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN!,
-  channelSecret: process.env.CHANNEL_SECRET!
+  channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN!,
+  channelSecret: process.env.LINE_CHANNEL_SECRET!
 };
 
 const port = process.env.PORT || 3000;
 const app = express();
 const lineClient = new line.Client(lineConfig);
 
-const handleText = ({
-  message,
-  replyToken
-}: IHandlerArgs<line.TextEventMessage>) => {
-  return lineClient.replyMessage(replyToken, {
-    type: "text",
-    text: message.text
-  });
-};
-
-const handleEvent = ({
-  type,
-  message,
-  replyToken,
-  source
-}: line.MessageEvent) => {
-  if (type !== "message") {
+const handleEvent = (e: line.MessageEvent) => {
+  if (e.type !== "message") {
     return Promise.resolve(null);
   }
 
-  switch (message.type) {
+  switch (e.message.type) {
     case "text":
-      return handleText({ message, replyToken, source });
+      return handleText(lineClient, e as ITextEvent);
     case "image":
     case "video":
     case "audio":
@@ -54,7 +34,7 @@ const handleEvent = ({
     case "sticker":
       return Promise.resolve(null);
     default:
-      throw new Error(`Unknown message: ${JSON.stringify(message)}`);
+      throw new Error(`Unknown message: ${JSON.stringify(e.message)}`);
   }
 };
 

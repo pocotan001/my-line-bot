@@ -3,7 +3,8 @@
   "alias": "ptan-line-bot",
   "env": {
     "NODE_ENV": "production",
-    "CHANNEL_ACCESS_TOKEN": "@line-channel-access-token",
-    "CHANNEL_SECRET": "@line-channel-secret"
+    "LINE_CHANNEL_ACCESS_TOKEN": "@line-channel-access-token",
+    "LINE_CHANNEL_SECRET": "@line-channel-secret",
+    "DOCOMO_API_KEY": "@docomo-api-key"
   }
 }

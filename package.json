@@ -5,7 +5,6 @@
   "engines": {
     "node": "8.9.2"
   },
-  "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
@@ -13,6 +12,7 @@
   },
   "dependencies": {
     "@line/bot-sdk": "6.0.1",
+    "axios": "0.18.0",
     "dotenv": "5.0.1",
     "express": "4.16.3"
   },
