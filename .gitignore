@@ -1,0 +1,10 @@
+.DS_Store
+.env
+.idea
+.tscache
+.yarn-cache
+*.mo
+dist
+node_modules
+npm-debug.log
+yarn.lock
