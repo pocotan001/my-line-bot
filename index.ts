@@ -20,6 +20,7 @@ const lineConfig = {
   channelSecret: process.env.CHANNEL_SECRET!
 };
 
+const port = process.env.PORT || 3000;
 const app = express();
 const lineClient = new line.Client(lineConfig);
 
@@ -71,4 +72,10 @@ app.post("/webhook", line.middleware(lineConfig), async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT);
+app.listen(port, (err: Error) => {
+  if (err) {
+    throw err;
+  }
+
+  console.log(`listening on ${port}`);
+});

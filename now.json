@@ -1,0 +1,9 @@
+{
+  "name": "ptan-line-bot",
+  "alias": "ptan-line-bot",
+  "env": {
+    "NODE_ENV": "production",
+    "CHANNEL_ACCESS_TOKEN": "@line-channel-access-token",
+    "CHANNEL_SECRET": "@line-channel-secret"
+  }
+}
